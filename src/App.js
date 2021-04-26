@@ -1,24 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import ColorBox from './ColorBox';
 
 function App() {
+  let boxes = [0.3, 0.4, 0.5, 0.7, 0.8, 1];
+  let [boxColor, setBoxColor] = useState('yellow');
+  let generateRandomColor = () => {
+    setBoxColor('hsla(' + (Math.random() * 360) + ', 100%, 50%, 1)');
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Color Palette Generator</h1>
+      <button className="generate-btn" onClick={generateRandomColor}>Generate</button>
+      <div className={"box-container"}>
+        {boxes.map((boxOpacity) => <ColorBox childboxColor={boxColor} childboxOpacity={boxOpacity}/>)}
+      </div> 
+    </>
   );
 }
 
